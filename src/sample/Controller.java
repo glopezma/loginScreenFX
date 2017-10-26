@@ -23,17 +23,24 @@ public class Controller {
     public void Login(ActionEvent event) throws Exception{
         if (username.getText().equals("user") && password.getText().equals("pass")) {
             status.setText("Login Success");
-            Stage primaryStage = new Stage();
-            Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));
-
-            Scene scene = new Scene(root);
-            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-
-            primaryStage.setTitle("Login");
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            MainScene();
+            Main.stage.setTitle("Login");
+            Main.stage.setScene(Main.scene);
+            Main.stage.show();
         } else {
             status.setText("Login Failed");
+        }
+    }
+
+    private void MainScene() throws Exception{
+        Main.root = FXMLLoader.load(getClass().getResource("Main.fxml"));
+        Scene loginScene = Main.stage.getScene();
+        if (Main.scene == null) {
+            Main.scene = new Scene(Main.root);
+            //Main.scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            Main.stage.setScene(Main.scene);
+        } else {
+            Main.stage.getScene().setRoot(Main.root);
         }
     }
 
